@@ -1,0 +1,20 @@
+{
+  "name": "funivan/customers-rest",
+  "authors": [
+    {
+      "name": "Ivan Shcherbak",
+      "email": "alotofall@gmail.com"
+    }
+  ],
+  "require": {},
+  "autoload": {
+    "psr-4": {
+      "\\Funivan\\CustomersRest\\": "src/"
+    }
+  },
+  "config": {
+    "platform": {
+      "php": "7.1"
+    }
+  }
+}
