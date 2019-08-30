@@ -6,11 +6,13 @@
       "email": "alotofall@gmail.com"
     }
   ],
-  "require": {},
   "autoload": {
     "psr-4": {
-      "\\Funivan\\CustomersRest\\": "src/"
+      "Funivan\\CustomersRest\\": "src/"
     }
+  },
+  "require": {
+    "ext-json": "*"
   },
   "config": {
     "platform": {

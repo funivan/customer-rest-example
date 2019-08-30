@@ -30,9 +30,11 @@ services:
       - ./.:/var/www
     depends_on:
       - php
-  test:
+  cli:
     build:
       context: ./docker/php-cli
-    command: "php tests.php"
+    volumes:
+      - ./.:/project
+    command: "php /project/test.php"
 volumes:
   data:

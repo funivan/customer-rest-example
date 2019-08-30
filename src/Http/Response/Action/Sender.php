@@ -13,7 +13,9 @@ final class Sender
     {
         $status = $response->status();
         $code = $status->code();
-        header(sprintf('HTTP/%s %s %s', 1.1, $code, $status->phrase()), true, $code);
+        if (!headers_sent()) {
+            header(sprintf('HTTP/%s %s %s', 1.1, $code, $status->phrase()), true, $code);
+        }
         echo \json_encode($response->body()->toArray(), JSON_PRETTY_PRINT);
     }
 }
