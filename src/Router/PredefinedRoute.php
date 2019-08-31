@@ -5,7 +5,7 @@ namespace Funivan\CustomersRest\Router;
 
 use Funivan\CustomersRest\Http\Handler\Handler;
 use Funivan\CustomersRest\Http\Parameters\FallbackParameter;
-use Funivan\CustomersRest\Http\Request\Request;
+use Funivan\CustomersRest\Http\Request\ServerRequest;
 use Funivan\CustomersRest\Http\Response\Response;
 
 class PredefinedRoute implements Route
@@ -30,7 +30,7 @@ class PredefinedRoute implements Route
         $this->next = $next;
     }
 
-    final public function match(Request $request): bool
+    final public function match(ServerRequest $request): bool
     {
         $result = false;
         $parameters = $request->server();
@@ -44,7 +44,7 @@ class PredefinedRoute implements Route
         return $result;
     }
 
-    final public function handle(Request $request): Response
+    final public function handle(ServerRequest $request): Response
     {
         return $this->next->handle($request);
     }

@@ -5,7 +5,7 @@ namespace Funivan\CustomersRest\Router;
 
 
 use Funivan\CustomersRest\Http\Handler\Handler;
-use Funivan\CustomersRest\Http\Request\Request;
+use Funivan\CustomersRest\Http\Request\ServerRequest;
 use Funivan\CustomersRest\Http\Response\Response;
 
 class Router implements Handler
@@ -28,7 +28,7 @@ class Router implements Handler
         $this->notFound = $notFound;
     }
 
-    final public function handle(Request $request): Response
+    final public function handle(ServerRequest $request): Response
     {
         foreach ($this->routes as $route) {
             if ($route->match($request)) {
