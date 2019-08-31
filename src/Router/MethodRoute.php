@@ -3,43 +3,35 @@ declare(strict_types=1);
 
 namespace Funivan\CustomersRest\Router;
 
+
 use Funivan\CustomersRest\Http\Handler\Handler;
 use Funivan\CustomersRest\Http\Parameters\FallbackParameter;
 use Funivan\CustomersRest\Http\Request\ServerRequest;
 use Funivan\CustomersRest\Http\Response\Response;
 
-class PredefinedRoute implements Route
+class MethodRoute implements Route
 {
     /**
      * @var string
      */
     private $method;
     /**
-     * @var string
-     */
-    private $url;
-    /**
      * @var Handler
      */
     private $next;
 
-    public function __construct(string $method, string $url, Handler $next)
+    public function __construct(string $method, Handler $next)
     {
         $this->method = $method;
-        $this->url = $url;
         $this->next = $next;
     }
 
     final public function match(ServerRequest $request): bool
     {
         $result = false;
-        $parameters = $request->server();
-        $url = new FallbackParameter($parameters, 'REQUEST_URI', '/');
-        if ($url->toString() === $this->url) {
-            $method = new FallbackParameter($parameters, 'REQUEST_METHOD', '');
-            if ($method->toString() === $this->method) {
-                $result = true;
-            }
+        $method = new FallbackParameter($request->server(), 'REQUEST_METHOD', '');
+        if ($method->toString() === $this->method) {
+            $result = true;
         }
         return $result;
     }
