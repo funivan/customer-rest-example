@@ -32,7 +32,7 @@ $app = new SafeApp(
                 '/v1/customers/',
                 new Router(
                     [
-                        new MethodRoute('GET', new ListCustomers($repository)),
+                        new MethodRoute('GET', new ListCustomers($repository, '/v1/customers/')),
                         new MethodRoute('POST', new CreateCustomers()),
                         new MethodRoute('DELETE', new DeleteCustomers()),
                         new MethodRoute('PUT', new UpdateCustomers())

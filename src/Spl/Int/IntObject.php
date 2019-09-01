@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace Funivan\CustomersRest\Spl;
+namespace Funivan\CustomersRest\Spl\Int;
 
 
 interface IntObject
