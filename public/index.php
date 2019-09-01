@@ -7,6 +7,7 @@ use Funivan\CustomersRest\App\Endpoint\Create\CreateCustomers;
 use Funivan\CustomersRest\App\Endpoint\Delete\DeleteCustomers;
 use Funivan\CustomersRest\App\Endpoint\ListCustomers\ListCustomers;
 use Funivan\CustomersRest\App\Endpoint\Update\UpdateCustomers;
+use Funivan\CustomersRest\App\Repository\CustomersDbRepository;
 use Funivan\CustomersRest\App\Response\Error\NotFoundResponse;
 use Funivan\CustomersRest\App\SafeApp;
 use Funivan\CustomersRest\Http\Parameters\Parameters;
@@ -22,6 +23,7 @@ $request = new ServerRequest(
     new Parameters($_POST),
     new Parameters($_SERVER)
 );
+$repository = new CustomersDbRepository(new PDO('dsn'));
 $sender = new Sender();
 $app = new SafeApp(
     new Router(
@@ -30,7 +32,7 @@ $app = new SafeApp(
                 '/v1/customers/',
                 new Router(
                     [
-                        new MethodRoute('GET', new ListCustomers()),
+                        new MethodRoute('GET', new ListCustomers($repository)),
                         new MethodRoute('POST', new CreateCustomers()),
                         new MethodRoute('DELETE', new DeleteCustomers()),
                         new MethodRoute('PUT', new UpdateCustomers())
