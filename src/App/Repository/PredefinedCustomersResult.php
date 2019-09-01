@@ -34,17 +34,17 @@ class PredefinedCustomersResult implements CustomersResult
     /**
      * @return Customer[]
      */
-    public function getIterator(): iterable
+    final public function getIterator(): iterable
     {
         yield from $this->customers;
     }
 
-    public function nextOffset(): int
+    final public function nextOffset(): int
     {
         return $this->nextOffset;
     }
 
-    public function previousOffset(): int
+    final public function previousOffset(): int
     {
         return $this->previousOffset;
     }
