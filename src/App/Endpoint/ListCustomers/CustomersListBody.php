@@ -1,25 +1,22 @@
 <?php
 
 
-namespace Funivan\CustomersRest\App\Response;
+namespace Funivan\CustomersRest\App\Endpoint\ListCustomers;
 
 
-use Funivan\CustomersRest\App\Entity\Customer;
+use Funivan\CustomersRest\App\Repository\CustomersResult;
 use Funivan\CustomersRest\Http\Response\Body\Body;
 
-class CustomersBody implements Body
+class CustomersListBody implements Body
 {
     /**
-     * @var array|Customer[]
+     * @var CustomersResult
      */
     private $customers;
 
-    /**
-     * @param Customer[] $customers
-     */
-    public function __construct(array $customers)
+    public function __construct(CustomersResult $result)
     {
-        $this->customers = $customers;
+        $this->customers = $result;
     }
 
     final public function toArray(): array
@@ -36,7 +33,9 @@ class CustomersBody implements Body
         return [
             'customers' => [
                 $data
-            ]
+            ],
+            'next'=>'',
+            'previous'=>''
         ];
     }
 }

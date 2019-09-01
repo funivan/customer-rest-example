@@ -3,24 +3,35 @@ declare(strict_types=1);
 
 namespace Funivan\CustomersRest\App\Endpoint\ListCustomers;
 
-use Funivan\CustomersRest\App\Entity\Customer;
-use Funivan\CustomersRest\App\Response\CustomersBody;
+use Funivan\CustomersRest\App\Repository\CustomersRepository;
 use Funivan\CustomersRest\Http\Handler\Handler;
+use Funivan\CustomersRest\Http\Parameters\FallbackIntParameter;
 use Funivan\CustomersRest\Http\Request\ServerRequest;
-use Funivan\CustomersRest\Http\Response\PredefinedResponse;
 use Funivan\CustomersRest\Http\Response\Response;
-use Funivan\CustomersRest\Http\Response\Status\PredefinedStatus;
+use Funivan\CustomersRest\Http\Response\SuccessResponse;
 
 class ListCustomers implements Handler
 {
+    /**
+     * @var CustomersRepository
+     */
+    private $repository;
+
+    public function __construct(CustomersRepository $repository)
+    {
+        $this->repository = $repository;
+    }
+
     final public function handle(ServerRequest $request): Response
     {
-        return new PredefinedResponse(
-            new PredefinedStatus(200, 'Ok'),
-            new CustomersBody([
-                new Customer("1", "a@gmail.com", "A", "Aa"),
-                new Customer("2", "b@gmail.com", "B", "Bb")
-            ])
+        $parameters = $request->get();
+        return new SuccessResponse(
+            new CustomersListBody(
+                $this->repository->fetch(
+                    new FallbackIntParameter($parameters, 'offset', 0),
+                    new FallbackIntParameter($parameters, 'size', 30)
+                )
+            )
         );
     }
 }

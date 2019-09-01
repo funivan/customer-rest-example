@@ -1,26 +1,13 @@
 <?php
 
-
 namespace Funivan\CustomersRest\App\Repository;
 
 use Funivan\CustomersRest\App\Entity\Customer;
+use Funivan\CustomersRest\Spl\IntObject;
 
-class CustomersRepository
+interface CustomersRepository
 {
+    public function fetch(IntObject $offset, IntObject $size): CustomersResult;
 
-    /**
-     * @return Customer[]
-     */
-    final public function all(): array
-    {
-        //@todo db fetch all customers
-        return [];
-    }
-
-    final public function find(): ?Customer
-    {
-        // @todo fetch customer by id
-        return null;
-    }
-
+    public function find(string $id): ?Customer;
 }
