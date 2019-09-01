@@ -32,8 +32,8 @@ $app = new SafeApp(
                     [
                         new MethodRoute('GET', new ListCustomers()),
                         new MethodRoute('POST', new CreateCustomers()),
-                        new PathRoute('DELETE', new DeleteCustomers()),
-                        new PathRoute('PUT', new UpdateCustomers())
+                        new MethodRoute('DELETE', new DeleteCustomers()),
+                        new MethodRoute('PUT', new UpdateCustomers())
                     ],
                     new NotFoundResponse('Unsupported method')
                 )
