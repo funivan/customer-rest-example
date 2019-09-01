@@ -12,17 +12,22 @@ class CustomersListBody implements Body
     /**
      * @var CustomersResult
      */
-    private $customers;
+    private $result;
+    /**
+     * @var PaginationUrl
+     */
+    private $url;
 
-    public function __construct(CustomersResult $result)
+    public function __construct(CustomersResult $result, PaginationUrl $url)
     {
-        $this->customers = $result;
+        $this->result = $result;
+        $this->url = $url;
     }
 
     final public function toArray(): array
     {
         $data = [];
-        foreach ($this->customers as $customer) {
+        foreach ($this->result as $customer) {
             $data[] = [
                 'id' => $customer->id(),
                 'email' => $customer->email(),
@@ -34,8 +39,8 @@ class CustomersListBody implements Body
             'customers' => [
                 $data
             ],
-            'next'=>'',
-            'previous'=>''
+            'next' => $this->url->with($this->result->nextOffset())->toString(),
+            'previous' => $this->url->with($this->result->previousOffset())->toString()
         ];
     }
 }

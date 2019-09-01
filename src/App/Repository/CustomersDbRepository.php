@@ -3,8 +3,8 @@ declare(strict_types=1);
 
 namespace Funivan\CustomersRest\App\Repository;
 
+use Funivan\CustomersRest\App\Endpoint\ListCustomers\Offset;
 use Funivan\CustomersRest\App\Entity\Customer;
-use Funivan\CustomersRest\Spl\IntObject;
 use PDO;
 
 class CustomersDbRepository implements CustomersRepository
@@ -20,7 +20,7 @@ class CustomersDbRepository implements CustomersRepository
         $this->pdo = $pdo;
     }
 
-    final public function fetch(IntObject $offset, IntObject $size): CustomersResult
+    final public function fetch(Offset $offset): CustomersResult
     {
         //@todo db fetch all customers
     }

@@ -4,7 +4,7 @@ declare(strict_types=1);
 namespace Funivan\CustomersRest\Http\Parameters;
 
 use Funivan\CustomersRest\Spl\ArrayObject;
-use Funivan\CustomersRest\Spl\IntObject;
+use Funivan\CustomersRest\Spl\Int\IntObject;
 
 class FallbackIntParameter implements IntObject
 {

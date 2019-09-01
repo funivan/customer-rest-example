@@ -12,25 +12,35 @@ use Funivan\CustomersRest\Http\Response\SuccessResponse;
 
 class ListCustomers implements Handler
 {
+    const DEFAULT_LIMIT = 30;
     /**
      * @var CustomersRepository
      */
     private $repository;
+    /**
+     * @var string
+     */
+    private $path;
 
-    public function __construct(CustomersRepository $repository)
+    public function __construct(CustomersRepository $repository, string $path)
     {
         $this->repository = $repository;
+        $this->path = $path;
     }
 
     final public function handle(ServerRequest $request): Response
     {
         $parameters = $request->get();
+        $offset = new Offset(
+            new FallbackIntParameter($parameters, 'offset', 0),
+            new FallbackIntParameter($parameters, 'size', 30)
+        );
         return new SuccessResponse(
             new CustomersListBody(
                 $this->repository->fetch(
-                    new FallbackIntParameter($parameters, 'offset', 0),
-                    new FallbackIntParameter($parameters, 'size', 30)
-                )
+                    $offset
+                ),
+                new PaginationUrl($this->path, 'offset', 'size', $offset)
             )
         );
     }
