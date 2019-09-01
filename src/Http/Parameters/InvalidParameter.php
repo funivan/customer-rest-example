@@ -6,10 +6,14 @@ namespace Funivan\CustomersRest\Http\Parameters;
 
 class InvalidParameter extends \InvalidArgumentException
 {
-    public function __construct(string $parameter)
+    public function __construct(string $parameter, string $reason)
     {
         parent::__construct(
-            sprintf('Can not fetch parameter: %s', $parameter)
+            sprintf(
+                'Can not fetch parameter: %s[%s]',
+                $parameter,
+                $reason
+            )
         );
     }
 }

@@ -3,7 +3,8 @@ declare(strict_types=1);
 
 namespace Funivan\CustomersRest\Http\Response\Body;
 
-interface Body
+use Funivan\CustomersRest\Spl\ArrayObject;
+
+interface Body extends ArrayObject
 {
-    public function toArray(): array;
 }

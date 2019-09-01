@@ -5,7 +5,7 @@ namespace Funivan\CustomersRest\Router;
 
 
 use Funivan\CustomersRest\Http\Handler\Handler;
-use Funivan\CustomersRest\Http\Parameters\FallbackParameter;
+use Funivan\CustomersRest\Http\Parameters\String\FallbackStringParameter;
 use Funivan\CustomersRest\Http\Request\ServerRequest;
 use Funivan\CustomersRest\Http\Response\Response;
 
@@ -29,7 +29,7 @@ class MethodRoute implements Route
     final public function match(ServerRequest $request): bool
     {
         $result = false;
-        $method = new FallbackParameter($request->server(), 'REQUEST_METHOD', '');
+        $method = new FallbackStringParameter($request->server(), 'REQUEST_METHOD', '');
         if ($method->toString() === $this->method) {
             $result = true;
         }

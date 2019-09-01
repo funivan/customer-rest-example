@@ -1,10 +1,11 @@
 <?php
-
+declare(strict_types=1);
 
 namespace Funivan\CustomersRest\Http\Parameters;
 
+use Funivan\CustomersRest\Spl\ArrayObject;
 
-class Parameters
+class Parameters implements ArrayObject
 {
 
     /**
@@ -12,25 +13,13 @@ class Parameters
      */
     private $data;
 
-    /**
-     * @param array $parameters Array<String, String>
-     */
-    public function __construct(array $parameters)
+    public function __construct(array $parameters = [])
     {
         $this->data = $parameters;
     }
 
-    final public function has(string $name): bool
+    final public function toArray(): array
     {
-        return array_key_exists($name, $this->data);
+        return $this->data;
     }
-
-    final public function value(string $name): string
-    {
-        if (!array_key_exists($name, $this->data)) {
-            throw new InvalidParameter($name);
-        }
-        return (string)$this->data[$name];
-    }
-
 }
