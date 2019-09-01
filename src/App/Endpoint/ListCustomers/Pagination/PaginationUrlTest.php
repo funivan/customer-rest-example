@@ -1,7 +1,7 @@
 <?php
 
 use Funivan\CustomersRest\App\Endpoint\ListCustomers\Offset;
-use Funivan\CustomersRest\App\Endpoint\ListCustomers\PaginationUrl;
+use Funivan\CustomersRest\App\Endpoint\ListCustomers\Pagination\PaginationUrl;
 
 return function () {
     yield 'Require all parameters' => function () {

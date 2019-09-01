@@ -3,6 +3,8 @@ declare(strict_types=1);
 
 namespace Funivan\CustomersRest\App\Endpoint\ListCustomers;
 
+use Funivan\CustomersRest\App\Endpoint\ListCustomers\ListBody\CustomersListBody;
+use Funivan\CustomersRest\App\Endpoint\ListCustomers\Pagination\PaginationUrl;
 use Funivan\CustomersRest\App\Repository\CustomersRepository;
 use Funivan\CustomersRest\Http\Handler\Handler;
 use Funivan\CustomersRest\Http\Parameters\FallbackIntParameter;

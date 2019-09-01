@@ -1,9 +1,10 @@
 <?php
 
 
-namespace Funivan\CustomersRest\App\Endpoint\ListCustomers;
+namespace Funivan\CustomersRest\App\Endpoint\ListCustomers\ListBody;
 
 
+use Funivan\CustomersRest\App\Endpoint\ListCustomers\Pagination\PaginationUrl;
 use Funivan\CustomersRest\App\Repository\CustomersResult;
 use Funivan\CustomersRest\Http\Response\Body\Body;
 

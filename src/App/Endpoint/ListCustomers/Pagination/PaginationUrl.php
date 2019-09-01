@@ -1,9 +1,10 @@
 <?php
 declare(strict_types=1);
 
-namespace Funivan\CustomersRest\App\Endpoint\ListCustomers;
+namespace Funivan\CustomersRest\App\Endpoint\ListCustomers\Pagination;
 
 
+use Funivan\CustomersRest\App\Endpoint\ListCustomers\Offset;
 use Funivan\CustomersRest\Spl\StringObject;
 
 
