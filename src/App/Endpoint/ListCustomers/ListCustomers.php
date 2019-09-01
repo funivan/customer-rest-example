@@ -18,8 +18,8 @@ class ListCustomers implements Handler
         return new PredefinedResponse(
             new PredefinedStatus(200, 'Ok'),
             new CustomersBody([
-                new Customer("1", "A", "Aa", "a@gmail.com"),
-                new Customer("2", "B", "Bb", "b@gmail.com")
+                new Customer("1", "a@gmail.com", "A", "Aa"),
+                new Customer("2", "b@gmail.com", "B", "Bb")
             ])
         );
     }
