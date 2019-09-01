@@ -2,6 +2,6 @@ services:
   - docker
 
 script:
-  - docker-compose build
+  - docker-compose build cli
   - docker run --rm --interactive --tty --volume $PWD:/app --user $(id -u):$(id -g) composer install
   - docker-compose run cli
