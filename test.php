@@ -2,7 +2,7 @@
 require __DIR__ . '/vendor/autoload.php';
 $dir = __DIR__ . '/src/';
 $tests = shell_exec('find  ' . $dir . " -type f -name '*Test.php'");
-$files = explode(' ', trim($tests));
+$files = preg_split('!\s*\n\s*!', trim($tests));
 foreach ($files as $file) {
     echo "~~~~~~~~~~\n";
     echo 'Start ' . str_replace($dir, '', $file) . "\n";
