@@ -17,6 +17,6 @@ class PredefinedCustomers implements CustomersList
 
     final public function getIterator(): iterable
     {
-        return $this->customers;
+        yield from $this->customers;
     }
 }

@@ -30,7 +30,7 @@ class FromRequestCustomersList implements CustomersList
     }
 
     /**
-     * @return Customer[]
+     * @return iterable
      */
     final public function getIterator(): iterable
     {

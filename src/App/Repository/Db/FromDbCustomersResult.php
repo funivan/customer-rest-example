@@ -35,7 +35,7 @@ class FromDbCustomersResult implements CustomersResult
     }
 
     /**
-     * @return Customer[]
+     * @return iterable
      */
     final public function getIterator(): iterable
     {

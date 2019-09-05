@@ -8,7 +8,7 @@ use IteratorAggregate;
 interface CustomersList extends IteratorAggregate
 {
     /**
-     * @return Customer[]
+     * @return iterable
      */
     public function getIterator(): iterable;
 }
