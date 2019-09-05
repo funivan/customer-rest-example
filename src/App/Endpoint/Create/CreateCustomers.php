@@ -28,7 +28,7 @@ class CreateCustomers implements Handler
 
     final public function handle(ServerRequest $request): Response
     {
-        $customers = $request->data()->toArray()['customers'] ?? [];
+        $customers = $request->data()->toArray()['customers'] ?? null;
         if (!is_array($customers)) {
             throw new InvalidParameter(
                 'customers',
