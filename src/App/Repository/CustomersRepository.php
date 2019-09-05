@@ -15,4 +15,9 @@ interface CustomersRepository
      * @param Customer[] $entities
      */
     public function create(array $entities): void;
+
+    /**
+     * @param string[] $ids
+     */
+    public function delete(array $ids): void;
 }

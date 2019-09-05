@@ -68,4 +68,19 @@ class CustomersDbRepository implements CustomersRepository
             throw $e;
         }
     }
+
+    final public function delete(array $ids): void
+    {
+        try {
+            $this->db->beginTransaction();
+            foreach ($ids as $id) {
+                $this->db->prepare('DELETE FROM customers where id = :id', ['id' => $id])
+                    ->execute();
+            }
+            $this->db->commit();
+        } catch (\Exception $e) {
+            $this->db->rollBack();
+            throw $e;
+        }
+    }
 }
