@@ -17,7 +17,7 @@ curl -d '{"customers":[{"email":"test@example.com", "name": "User", "lastName":"
 ## Update customer
 ```shell script
 # request
-curl -d '{"customers":[{"id":"123","email":"test@example.com", "name": "User", "lastName":"Test"}]}' \
+curl -d '{"customers":[{"id":"123","email":"test2@example.com", "name": "User", "lastName":"Test"}]}' \
  -H "Content-Type: application/json" \
  -X PUT http://localhost/v1/customers/
 # Response: user ids stored in the db
