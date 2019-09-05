@@ -39,12 +39,12 @@ class PredefinedCustomersResult implements CustomersResult
         yield from $this->customers;
     }
 
-    final public function nextOffset(): int
+    final public function nextLimit(): ?int
     {
         return $this->nextOffset;
     }
 
-    final public function previousOffset(): int
+    final public function previousLimit(): ?int
     {
         return $this->previousOffset;
     }

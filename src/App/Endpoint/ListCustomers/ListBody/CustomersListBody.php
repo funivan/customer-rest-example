@@ -36,12 +36,14 @@ class CustomersListBody implements Body
                 'lastName' => $customer->lastName(),
             ];
         }
+        $next = $this->result->nextLimit();
+        $previous = $this->result->previousLimit();
         return [
             'customers' => [
                 $data
             ],
-            'next' => $this->url->with($this->result->nextOffset())->toString(),
-            'previous' => $this->url->with($this->result->previousOffset())->toString()
+            'next' => $next !== null ? $this->url->with($next)->toString() : '',
+            'previous' => $previous !== null ? $this->url->with($previous)->toString() : ''
         ];
     }
 }

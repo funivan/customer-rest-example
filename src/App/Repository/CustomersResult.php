@@ -8,7 +8,7 @@ use Funivan\CustomersRest\App\Entity\CustomersList;
 
 interface CustomersResult extends CustomersList
 {
-    public function nextOffset(): int;
+    public function nextLimit(): ?int;
 
-    public function previousOffset(): int;
+    public function previousLimit(): ?int;
 }

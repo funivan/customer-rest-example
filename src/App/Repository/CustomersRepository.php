@@ -7,7 +7,7 @@ use Funivan\CustomersRest\App\Entity\CustomersList;
 
 interface CustomersRepository
 {
-    public function fetch(Limit $offset): CustomersResult;
+    public function fetch(Limit $limit): CustomersResult;
 
     public function create(CustomersList $customers): void;
 

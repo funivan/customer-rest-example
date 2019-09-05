@@ -39,14 +39,14 @@ class PredefinedPaginationUrl implements PaginationUrl
      */
     final public function with(int $offset): PaginationUrl
     {
-        return new self($this->path, $this->offsetName, $this->limitName, Limit::createFromPlain($offset, $this->offset->getRowCount()));
+        return new self($this->path, $this->offsetName, $this->limitName, Limit::createFromPlain($offset, $this->offset->getRowsCount()));
     }
 
     final public function toString(): string
     {
         return $this->path . '?' . http_build_query([
                 $this->offsetName => $this->offset->getOffset(),
-                $this->limitName => $this->offset->getRowCount(),
+                $this->limitName => $this->offset->getRowsCount(),
             ]);
     }
 }

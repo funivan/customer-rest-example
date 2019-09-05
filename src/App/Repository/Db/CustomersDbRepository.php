@@ -7,7 +7,6 @@ use Funivan\CustomersRest\App\Endpoint\ListCustomers\Limit;
 use Funivan\CustomersRest\App\Entity\CustomersList;
 use Funivan\CustomersRest\App\Repository\CustomersRepository;
 use Funivan\CustomersRest\App\Repository\CustomersResult;
-use Funivan\CustomersRest\App\Repository\PredefinedCustomersResult;
 use RuntimeException;
 
 class CustomersDbRepository implements CustomersRepository
@@ -23,9 +22,17 @@ class CustomersDbRepository implements CustomersRepository
         $this->db = $db;
     }
 
-    final public function fetch(Limit $offset): CustomersResult
+    final public function fetch(Limit $limit): CustomersResult
     {
-        return new PredefinedCustomersResult();
+        $statement = $this->db->prepare(
+            'SELECT SQL_CALC_FOUND_ROWS * FROM customers LIMIT ' . $limit->getOffset() . ', ' . $limit->getRowsCount()
+        );
+        $statement->execute();
+        $result = $statement->fetchAll(\PDO::FETCH_ASSOC);
+        $rowsNumStatement = $this->db->prepare('SELECT FOUND_ROWS() as rowcount');
+        $rowsNumStatement->execute();
+        $size = (int)$rowsNumStatement->fetchColumn();
+        return new FromDbCustomersResult($result, $size, $limit);
     }
 
     final public function create(CustomersList $customers): void

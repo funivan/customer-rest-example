@@ -28,7 +28,7 @@ class InMemoryRepository implements CustomersRepository
         }
     }
 
-    final public function fetch(Limit $offset): CustomersResult
+    final public function fetch(Limit $limit): CustomersResult
     {
         return new PredefinedCustomersResult();
     }

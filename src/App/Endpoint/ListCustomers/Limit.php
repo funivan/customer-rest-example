@@ -40,7 +40,7 @@ class Limit
         return $this->offset->toInt();
     }
 
-    final public function getRowCount(): int
+    final public function getRowsCount(): int
     {
         return $this->size->toInt();
     }

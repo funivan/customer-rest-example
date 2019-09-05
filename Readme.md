@@ -42,4 +42,9 @@ curl -d '{"ids":["a29cccaebbc352c8586aacdbf3c32dd9", "0f35708d4e33816990867db7f6
 #        "0f35708d4e33816990867db7f6a44055"
 #    ]
  ```
-
+## Fetch customers
+```shell script
+curl -X GET http://localhost/v1/customers/
+curl -X GET http://localhost/v1/customers/?offset=2&size=2
+curl -X GET http://localhost/v1/customers/?offset=4&size=4
+ ```

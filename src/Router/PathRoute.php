@@ -29,7 +29,7 @@ class PathRoute implements Route
     {
         $result = false;
         $url = new FallbackStringParameter($request->server(), 'REQUEST_URI', '/');
-        if ($url->toString() === $this->url) {
+        if (preg_replace('!\?.*$!', '', $url->toString()) === $this->url) {
             $result = true;
         }
         return $result;
