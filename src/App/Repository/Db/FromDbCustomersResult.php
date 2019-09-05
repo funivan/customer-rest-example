@@ -52,6 +52,7 @@ class FromDbCustomersResult implements CustomersResult
     {
         $result = null;
         $pages = ceil($this->size / $this->limit->getRowsCount());
+        //@todo fix pagination error
         if ($pages !== 1 && $pages > $this->limit->getOffset()) {
             $result = $this->limit->getOffset() + $this->limit->getRowsCount();
         }
