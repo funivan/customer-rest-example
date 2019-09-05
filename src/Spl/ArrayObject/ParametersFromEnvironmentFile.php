@@ -20,12 +20,12 @@ class ParametersFromEnvironmentFile implements ArrayObject
     {
         $result = [];
         preg_match_all(
-            '!^\s*([^:]+)\s*:\s*([\'\"])(.+)(\\2)\s*$!m',
+            '!^(?P<key>[^#][^=]+)=(?P<value>.+)$!m',
             file_get_contents($this->path),
             $rawData
         );
-        foreach ($rawData[1] as $index => $name) {
-            $value = $rawData[3][$index] ?? null;
+        foreach ($rawData['key'] as $index => $name) {
+            $value = $rawData['value'][$index] ?? null;
             if ($value !== null) {
                 $result[$name] = $value;
             }
