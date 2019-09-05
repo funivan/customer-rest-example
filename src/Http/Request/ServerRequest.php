@@ -5,6 +5,7 @@ namespace Funivan\CustomersRest\Http\Request;
 
 
 use Funivan\CustomersRest\Spl\ArrayObject\ArrayObject;
+use Funivan\CustomersRest\Spl\ArrayObject\PredefinedArray;
 
 class ServerRequest implements Request
 {
@@ -22,11 +23,11 @@ class ServerRequest implements Request
      */
     private $server;
 
-    public function __construct(ArrayObject $get, ArrayObject $data, ArrayObject $server)
+    public function __construct(ArrayObject $get = null, ArrayObject $data = null, ArrayObject $server = null)
     {
-        $this->get = $get;
-        $this->data = $data;
-        $this->server = $server;
+        $this->get = $get ?? new PredefinedArray();
+        $this->data = $data ?? new PredefinedArray();
+        $this->server = $server ?? new PredefinedArray();
     }
 
     final public function get(): ArrayObject

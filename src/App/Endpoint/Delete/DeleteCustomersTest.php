@@ -2,6 +2,7 @@
 
 
 use Funivan\CustomersRest\App\Endpoint\Delete\DeleteCustomers;
+use Funivan\CustomersRest\App\Repository\InMemory\InMemoryRepository;
 use Funivan\CustomersRest\Http\Request\ServerRequest;
 use Funivan\CustomersRest\Spl\ArrayObject\PredefinedArray;
 
@@ -14,7 +15,7 @@ return function () {
             ]),
             new PredefinedArray()
         );
-        $response = (new DeleteCustomers())->handle($request);
+        $response = (new DeleteCustomers(new InMemoryRepository()))->handle($request);
         return $response->body()->toArray() === ['ids' => ['1', '2', '3']];
     };
 };
