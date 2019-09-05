@@ -17,7 +17,7 @@ use Funivan\CustomersRest\Http\Response\Action\JsonResponseSender;
 use Funivan\CustomersRest\Router\MethodRoute;
 use Funivan\CustomersRest\Router\PathRoute;
 use Funivan\CustomersRest\Router\Router;
-use Funivan\CustomersRest\Spl\ArrayObject\FromIniFileArrayObject;
+use Funivan\CustomersRest\Spl\ArrayObject\ParametersFromEnvironmentFile;
 use Funivan\CustomersRest\Spl\ArrayObject\PredefinedArray;
 
 require __DIR__ . '/../vendor/autoload.php';
@@ -28,7 +28,7 @@ $request = new ServerRequest(
 );
 $repository = new CustomersDbRepository(
     new Db(
-        new FromIniFileArrayObject(__DIR__ . '/../variables.env')
+        new ParametersFromEnvironmentFile(__DIR__ . '/../variables.env')
     )
 );
 $sender = new JsonResponseSender();
