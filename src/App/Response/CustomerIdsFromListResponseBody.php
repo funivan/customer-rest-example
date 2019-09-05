@@ -3,20 +3,17 @@ declare(strict_types=1);
 
 namespace Funivan\CustomersRest\App\Response;
 
-use Funivan\CustomersRest\App\Entity\Customer;
+use Funivan\CustomersRest\App\Entity\CustomersList;
 use Funivan\CustomersRest\Http\Response\Body\Body;
 
 class CustomerIdsFromListResponseBody implements Body
 {
     /**
-     * @var array|Customer[]
+     * @var CustomersList
      */
     private $customers;
 
-    /**
-     * @param Customer[] $customers
-     */
-    public function __construct(array $customers)
+    public function __construct(CustomersList $customers)
     {
         $this->customers = $customers;
     }

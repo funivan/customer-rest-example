@@ -6,6 +6,7 @@ namespace Funivan\CustomersRest\App\Repository\Db;
 use Exception;
 use Funivan\CustomersRest\App\Endpoint\ListCustomers\Offset;
 use Funivan\CustomersRest\App\Entity\Customer;
+use Funivan\CustomersRest\App\Entity\CustomersList;
 use Funivan\CustomersRest\App\Repository\CustomersRepository;
 use Funivan\CustomersRest\App\Repository\CustomersResult;
 use Funivan\CustomersRest\App\Repository\PredefinedCustomersResult;
@@ -44,14 +45,11 @@ class CustomersDbRepository implements CustomersRepository
         return $result;
     }
 
-    /**
-     * @param Customer[] $entities
-     */
-    final public function create(array $entities): void
+    final public function create(CustomersList $customers): void
     {
         try {
             $this->db->beginTransaction();
-            foreach ($entities as $entity) {
+            foreach ($customers as $entity) {
                 $this->db->prepare(
                     'INSERT INTO customers SET id=:id, email=:email, `name`=:name, lastName=:lastName',
                     [

@@ -4,6 +4,7 @@ namespace Funivan\CustomersRest\App\Repository;
 
 use Funivan\CustomersRest\App\Endpoint\ListCustomers\Offset;
 use Funivan\CustomersRest\App\Entity\Customer;
+use Funivan\CustomersRest\App\Entity\CustomersList;
 
 interface CustomersRepository
 {
@@ -11,10 +12,7 @@ interface CustomersRepository
 
     public function find(string $id): ?Customer;
 
-    /**
-     * @param Customer[] $entities
-     */
-    public function create(array $entities): void;
+    public function create(CustomersList $customers): void;
 
     /**
      * @param string[] $ids

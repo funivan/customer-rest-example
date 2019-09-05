@@ -3,16 +3,15 @@
 
 namespace Funivan\CustomersRest\App\Endpoint\Create;
 
-use Funivan\CustomersRest\App\Entity\Customer;
+use Funivan\CustomersRest\App\Endpoint\FromRequestCustomersList;
+use Funivan\CustomersRest\App\Entity\CachedCustomersList;
+use Funivan\CustomersRest\App\Entity\Factory\RandomIdFactory;
 use Funivan\CustomersRest\App\Repository\CustomersRepository;
 use Funivan\CustomersRest\App\Response\CustomerIdsFromListResponseBody;
 use Funivan\CustomersRest\Http\Handler\Handler;
-use Funivan\CustomersRest\Http\Parameters\InvalidParameter;
-use Funivan\CustomersRest\Http\Parameters\String\RequiredStringParameter;
 use Funivan\CustomersRest\Http\Request\ServerRequest;
 use Funivan\CustomersRest\Http\Response\Response;
 use Funivan\CustomersRest\Http\Response\SuccessResponse;
-use Funivan\CustomersRest\Spl\ArrayObject\PredefinedArray;
 
 class CreateCustomers implements Handler
 {
@@ -28,26 +27,12 @@ class CreateCustomers implements Handler
 
     final public function handle(ServerRequest $request): Response
     {
-        $customers = $request->data()->toArray()['customers'] ?? null;
-        if (!is_array($customers)) {
-            throw new InvalidParameter(
-                'customers',
-                sprintf('expect type to be array, %s given', gettype($customers))
-            );
-        }
-        $entities = [];
-        foreach ($customers as $customer) {
-            $parameters = new PredefinedArray($customer);
-            $entities[] = new Customer(
-                md5(microtime(true) . random_int(0, 5000)),
-                (new RequiredStringParameter($parameters, 'email'))->toString(),
-                (new RequiredStringParameter($parameters, 'name'))->toString(),
-                (new RequiredStringParameter($parameters, 'lastName'))->toString()
-            );
-        }
-        $this->repository->create($entities);
+        $customers = new CachedCustomersList(
+            new FromRequestCustomersList($request->data(), new RandomIdFactory())
+        );
+        $this->repository->create($customers);
         return new SuccessResponse(
-            new CustomerIdsFromListResponseBody($entities)
+            new CustomerIdsFromListResponseBody($customers)
         );
     }
 }

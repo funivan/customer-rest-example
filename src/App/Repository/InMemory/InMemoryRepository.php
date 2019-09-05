@@ -6,6 +6,7 @@ namespace Funivan\CustomersRest\App\Repository\InMemory;
 
 use Funivan\CustomersRest\App\Endpoint\ListCustomers\Offset;
 use Funivan\CustomersRest\App\Entity\Customer;
+use Funivan\CustomersRest\App\Entity\CustomersList;
 use Funivan\CustomersRest\App\Repository\CustomersRepository;
 use Funivan\CustomersRest\App\Repository\CustomersResult;
 use Funivan\CustomersRest\App\Repository\PredefinedCustomersResult;
@@ -37,12 +38,9 @@ class InMemoryRepository implements CustomersRepository
         return $this->customers[$id] ?? null;
     }
 
-    /**
-     * @param Customer[] $entities
-     */
-    final public function create(array $entities): void
+    final public function create(CustomersList $customers): void
     {
-        foreach ($entities as $entity) {
+        foreach ($customers as $entity) {
             $id = $entity->id();
             if (array_key_exists($id, $this->customers)) {
                 throw new \RuntimeException('Customer already exist');
