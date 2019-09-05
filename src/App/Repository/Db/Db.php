@@ -8,6 +8,10 @@ use Funivan\CustomersRest\Spl\ArrayObject\ArrayObject;
 use PDO;
 use PDOStatement;
 
+/**
+ * Proxy pattern
+ * Main goal - lazy initialization
+ */
 class Db
 {
     /**

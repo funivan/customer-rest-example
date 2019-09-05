@@ -9,6 +9,9 @@ use Funivan\CustomersRest\Http\Parameters\String\FallbackStringParameter;
 use Funivan\CustomersRest\Http\Request\ServerRequest;
 use Funivan\CustomersRest\Http\Response\Response;
 
+/**
+ * Chain of Responsibility pattern
+ */
 class MethodRoute implements Route
 {
     /**

@@ -8,6 +8,9 @@ use Funivan\CustomersRest\Http\Handler\Handler;
 use Funivan\CustomersRest\Http\Request\ServerRequest;
 use Funivan\CustomersRest\Http\Response\Response;
 
+/**
+ * Strategy pattern
+ */
 class Router implements Handler
 {
     /**
