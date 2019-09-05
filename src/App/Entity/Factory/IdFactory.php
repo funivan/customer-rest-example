@@ -7,5 +7,5 @@ use Funivan\CustomersRest\Spl\ArrayObject\ArrayObject;
 
 interface IdFactory
 {
-    public function create(ArrayObject $object): string;
+    public function create(ArrayObject $parameters): string;
 }

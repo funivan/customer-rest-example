@@ -5,6 +5,7 @@ namespace Funivan\CustomersRest\Http\Parameters\String;
 
 
 use Funivan\CustomersRest\Http\Parameters\InvalidParameter;
+use Funivan\CustomersRest\Spl\ArrayObject\ArrayObject;
 use Funivan\CustomersRest\Spl\ArrayObject\PredefinedArray;
 use Funivan\CustomersRest\Spl\StringObject;
 
@@ -19,7 +20,7 @@ class RequiredStringParameter implements StringObject
      */
     private $key;
 
-    public function __construct(PredefinedArray $parameters, string $key)
+    public function __construct(ArrayObject $parameters, string $key)
     {
         $this->parameters = $parameters;
         $this->key = $key;

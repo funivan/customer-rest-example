@@ -58,4 +58,18 @@ class InMemoryRepository implements CustomersRepository
             unset($this->customers[$id]);
         }
     }
+
+    final public function update(CustomersList $customers): void
+    {
+        foreach ($customers as $customer) {
+            $id = $customer->id();
+            if (array_key_exists($id, $this->customers)) {
+                $this->customers[$id] = $customer;
+            } else {
+                throw new \RuntimeException(
+                    sprintf('Can no update user with id: %s', $id)
+                );
+            }
+        }
+    }
 }

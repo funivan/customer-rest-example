@@ -18,4 +18,6 @@ interface CustomersRepository
      * @param string[] $ids
      */
     public function delete(array $ids): void;
+
+    public function update(CustomersList $customers): void;
 }

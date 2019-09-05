@@ -1,16 +1,17 @@
 <?php
-declare(strict_types=1);
+
 
 namespace Funivan\CustomersRest\App\Entity\Factory;
 
 
+use Funivan\CustomersRest\Http\Parameters\String\RequiredStringParameter;
 use Funivan\CustomersRest\Spl\ArrayObject\ArrayObject;
 
-class RandomIdFactory implements IdFactory
+class FromParametersId implements IdFactory
 {
 
     final public function create(ArrayObject $parameters): string
     {
-        return md5(microtime(true) . random_int(0, 5000));
+        return (new RequiredStringParameter($parameters, 'id'))->toString();
     }
 }

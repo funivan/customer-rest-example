@@ -42,7 +42,7 @@ $app = new SafeApp(
                         new MethodRoute('GET', new ListCustomers($repository, '/v1/customers/')),
                         new MethodRoute('POST', new CreateCustomers($repository)),
                         new MethodRoute('DELETE', new DeleteCustomers($repository)),
-                        new MethodRoute('PUT', new UpdateCustomers())
+                        new MethodRoute('PUT', new UpdateCustomers($repository))
                     ],
                     new NotFoundResponse('Unsupported method')
                 )
