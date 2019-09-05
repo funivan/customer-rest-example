@@ -2,13 +2,13 @@
 
 namespace Funivan\CustomersRest\Http\Request;
 
-use Funivan\CustomersRest\Http\Parameters\Parameters;
+use Funivan\CustomersRest\Spl\ArrayObject\ArrayObject;
 
 interface Request
 {
-    public function get(): Parameters;
+    public function get(): ArrayObject;
 
-    public function server(): Parameters;
+    public function server(): ArrayObject;
 
-    public function post(): Parameters;
+    public function data(): ArrayObject;
 }

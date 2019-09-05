@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Funivan\CustomersRest\Http\Parameters\StringList;
 
 use Funivan\CustomersRest\Http\Parameters\InvalidParameter;
-use Funivan\CustomersRest\Spl\ArrayObject;
+use Funivan\CustomersRest\Spl\ArrayObject\ArrayObject;
 use Funivan\CustomersRest\Spl\StringList;
 
 class StringListParameter implements StringList

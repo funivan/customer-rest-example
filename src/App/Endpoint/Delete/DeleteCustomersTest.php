@@ -2,17 +2,17 @@
 
 
 use Funivan\CustomersRest\App\Endpoint\Delete\DeleteCustomers;
-use Funivan\CustomersRest\Http\Parameters\Parameters;
 use Funivan\CustomersRest\Http\Request\ServerRequest;
+use Funivan\CustomersRest\Spl\ArrayObject\PredefinedArray;
 
 return function () {
     yield 'Expect same ids in response' => function () {
         $request = new ServerRequest(
-            new Parameters(),
-            new Parameters([
+            new PredefinedArray(),
+            new PredefinedArray([
                 'ids' => ['1', '2', '3']
             ]),
-            new Parameters()
+            new PredefinedArray()
         );
         $response = (new DeleteCustomers())->handle($request);
         return $response->body()->toArray() === ['ids' => ['1', '2', '3']];

@@ -7,24 +7,30 @@ use Funivan\CustomersRest\App\Endpoint\Create\CreateCustomers;
 use Funivan\CustomersRest\App\Endpoint\Delete\DeleteCustomers;
 use Funivan\CustomersRest\App\Endpoint\ListCustomers\ListCustomers;
 use Funivan\CustomersRest\App\Endpoint\Update\UpdateCustomers;
-use Funivan\CustomersRest\App\Repository\Db\AppPdo;
 use Funivan\CustomersRest\App\Repository\Db\CustomersDbRepository;
+use Funivan\CustomersRest\App\Repository\Db\Db;
 use Funivan\CustomersRest\App\Response\Error\NotFoundResponse;
 use Funivan\CustomersRest\App\SafeApp;
-use Funivan\CustomersRest\Http\Parameters\Parameters;
+use Funivan\CustomersRest\Http\Parameters\JsonInputFromStream;
 use Funivan\CustomersRest\Http\Request\ServerRequest;
 use Funivan\CustomersRest\Http\Response\Action\Sender;
 use Funivan\CustomersRest\Router\MethodRoute;
 use Funivan\CustomersRest\Router\PathRoute;
 use Funivan\CustomersRest\Router\Router;
+use Funivan\CustomersRest\Spl\ArrayObject\FromIniFileArrayObject;
+use Funivan\CustomersRest\Spl\ArrayObject\PredefinedArray;
 
 require __DIR__ . '/../vendor/autoload.php';
 $request = new ServerRequest(
-    new Parameters($_GET),
-    new Parameters($_POST),
-    new Parameters($_SERVER)
+    new PredefinedArray($_GET),
+    new JsonInputFromStream(),
+    new PredefinedArray($_SERVER)
 );
-$repository = new CustomersDbRepository(new AppPdo());
+$repository = new CustomersDbRepository(
+    new Db(
+        new FromIniFileArrayObject(__DIR__ . '/../variables.env')
+    )
+);
 $sender = new Sender();
 $app = new SafeApp(
     new Router(

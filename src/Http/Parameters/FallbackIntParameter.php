@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace Funivan\CustomersRest\Http\Parameters;
 
-use Funivan\CustomersRest\Spl\ArrayObject;
+use Funivan\CustomersRest\Spl\ArrayObject\ArrayObject;
 use Funivan\CustomersRest\Spl\Int\IntObject;
 
 class FallbackIntParameter implements IntObject
@@ -30,7 +30,7 @@ class FallbackIntParameter implements IntObject
 
     final public function toInt(): int
     {
-        $data = $this->parameters[$this->key] ?? $this->fallback;
+        $data = $this->parameters->toArray()[$this->key] ?? $this->fallback;
         // Php is a strange language
         if (is_int($data) || (is_numeric($data) && ((string)((int)$data)) === $data)) {
             return (int)$data;

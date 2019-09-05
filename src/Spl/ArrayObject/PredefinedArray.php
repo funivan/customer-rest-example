@@ -1,11 +1,9 @@
 <?php
 declare(strict_types=1);
 
-namespace Funivan\CustomersRest\Http\Parameters;
+namespace Funivan\CustomersRest\Spl\ArrayObject;
 
-use Funivan\CustomersRest\Spl\ArrayObject;
-
-class Parameters implements ArrayObject
+class PredefinedArray implements ArrayObject
 {
 
     /**

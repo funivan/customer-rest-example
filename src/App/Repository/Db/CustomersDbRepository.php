@@ -3,37 +3,39 @@ declare(strict_types=1);
 
 namespace Funivan\CustomersRest\App\Repository\Db;
 
+use Exception;
 use Funivan\CustomersRest\App\Endpoint\ListCustomers\Offset;
 use Funivan\CustomersRest\App\Entity\Customer;
 use Funivan\CustomersRest\App\Repository\CustomersRepository;
 use Funivan\CustomersRest\App\Repository\CustomersResult;
-use PDO;
+use Funivan\CustomersRest\App\Repository\PredefinedCustomersResult;
 
 class CustomersDbRepository implements CustomersRepository
 {
 
     /**
-     * @var PDO
+     * @var Db
      */
-    private $pdo;
+    private $db;
 
-    public function __construct(PDO $pdo)
+    public function __construct(Db $db)
     {
-        $this->pdo = $pdo;
+        $this->db = $db;
     }
 
     final public function fetch(Offset $offset): CustomersResult
     {
         //@todo db fetch all customers
+        return new PredefinedCustomersResult();
     }
 
     final public function find(string $id): ?Customer
     {
-        $statement = $this->pdo->prepare('SELECT * FROM customers WHERE id = :id limit 1');
-        $statement->bindValue(':id', $id);
-        $data = $statement->fetch();
+        $data = $this->db->prepare(
+            'SELECT * FROM customers WHERE id = :id limit 1', ['id' => $id]
+        )->fetch();
         if (!is_array($data)) {
-            throw new DbExecutionException('Can not fetch user, invalid result');
+            throw new Exception('Can not fetch user, invalid result');
         }
         $result = null;
         if ($data !== []) {
@@ -48,18 +50,21 @@ class CustomersDbRepository implements CustomersRepository
     final public function create(array $entities): void
     {
         try {
-            $this->pdo->beginTransaction();
+            $this->db->beginTransaction();
             foreach ($entities as $entity) {
-                $statement = $this->pdo->prepare('INSERT INTO customers SET id=:id, email=:email, `name`=:name, lastName=:lastName');
-                $statement->bindValue(':id', $entity->id());
-                $statement->bindValue(':email', $entity->email());
-                $statement->bindValue(':name', $entity->name());
-                $statement->bindValue(':lastName', $entity->lastName());
-                $statement->execute();
+                $this->db->prepare(
+                    'INSERT INTO customers SET id=:id, email=:email, `name`=:name, lastName=:lastName',
+                    [
+                        'id' => $entity->id(),
+                        'email' => $entity->email(),
+                        'name' => $entity->name(),
+                        'lastName' => $entity->lastName()
+                    ]
+                )->execute();
             }
-            $this->pdo->commit();
+            $this->db->commit();
         } catch (\Exception $e) {
-            $this->pdo->rollBack();
+            $this->db->rollBack();
             throw $e;
         }
     }

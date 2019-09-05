@@ -6,13 +6,13 @@ namespace Funivan\CustomersRest\Http\Parameters\String;
 
 
 use Funivan\CustomersRest\Http\Parameters\InvalidParameter;
-use Funivan\CustomersRest\Http\Parameters\Parameters;
+use Funivan\CustomersRest\Spl\ArrayObject\PredefinedArray;
 use Funivan\CustomersRest\Spl\StringObject;
 
 class FallbackStringParameter implements StringObject
 {
     /**
-     * @var Parameters
+     * @var PredefinedArray
      */
     private $parameters;
     /**
@@ -24,7 +24,7 @@ class FallbackStringParameter implements StringObject
      */
     private $fallback;
 
-    public function __construct(Parameters $parameters, string $key, string $fallback)
+    public function __construct(PredefinedArray $parameters, string $key, string $fallback)
     {
         $this->parameters = $parameters;
         $this->key = $key;
@@ -33,7 +33,7 @@ class FallbackStringParameter implements StringObject
 
     final public function toString(): string
     {
-        $data = $this->parameters[$this->key] ?? $this->fallback;
+        $data = $this->parameters->toArray()[$this->key] ?? $this->fallback;
         if (!is_string($data)) {
             throw new InvalidParameter($this->key, 'invalid type, expect string');
         }

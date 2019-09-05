@@ -8,11 +8,11 @@ use Funivan\CustomersRest\App\Repository\CustomersRepository;
 use Funivan\CustomersRest\App\Response\CustomerIdsFromListResponseBody;
 use Funivan\CustomersRest\Http\Handler\Handler;
 use Funivan\CustomersRest\Http\Parameters\InvalidParameter;
-use Funivan\CustomersRest\Http\Parameters\Parameters;
 use Funivan\CustomersRest\Http\Parameters\String\RequiredStringParameter;
 use Funivan\CustomersRest\Http\Request\ServerRequest;
 use Funivan\CustomersRest\Http\Response\Response;
 use Funivan\CustomersRest\Http\Response\SuccessResponse;
+use Funivan\CustomersRest\Spl\ArrayObject\PredefinedArray;
 
 class CreateCustomers implements Handler
 {
@@ -28,13 +28,13 @@ class CreateCustomers implements Handler
 
     final public function handle(ServerRequest $request): Response
     {
-        $customers = $request->post()['customers'] ?? [];
+        $customers = $request->data()->toArray()['customers'] ?? [];
         if (!is_array($customers) || $customers === []) {
-            throw new InvalidParameter('customers', 'Expect parameter customers');
+            throw new InvalidParameter('customers', 'empty or undefined parameter');
         }
         $entities = [];
         foreach ($customers as $customer) {
-            $parameters = new Parameters($customer);
+            $parameters = new PredefinedArray($customer);
             $entities[] = new Customer(
                 md5(microtime(true) . random_int(0, 5000)),
                 (new RequiredStringParameter($parameters, 'email'))->toString(),

@@ -17,7 +17,7 @@ class DeleteCustomers implements Handler
     final public function handle(ServerRequest $request): Response
     {
         $ids = iterator_to_array(
-            new StringListParameter($request->post(), 'ids')
+            new StringListParameter($request->data(), 'ids')
         );
         //@todo implement deletion
         return new SuccessResponse(

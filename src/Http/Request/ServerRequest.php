@@ -4,46 +4,44 @@ declare(strict_types=1);
 namespace Funivan\CustomersRest\Http\Request;
 
 
-use Funivan\CustomersRest\Http\Parameters\Parameters;
-use Funivan\CustomersRest\Http\RequestCookiesInterface;
-use Funivan\CustomersRest\Http\RequestInterface;
+use Funivan\CustomersRest\Spl\ArrayObject\ArrayObject;
 
 class ServerRequest implements Request
 {
 
     /**
-     * @var Parameters
+     * @var ArrayObject
      */
     private $get;
     /**
-     * @var Parameters
+     * @var ArrayObject
      */
-    private $post;
+    private $data;
     /**
-     * @var Parameters
+     * @var ArrayObject
      */
     private $server;
 
-    public function __construct(Parameters $get, Parameters $post, Parameters $server)
+    public function __construct(ArrayObject $get, ArrayObject $data, ArrayObject $server)
     {
         $this->get = $get;
-        $this->post = $post;
+        $this->data = $data;
         $this->server = $server;
     }
 
-    final public function get(): Parameters
+    final public function get(): ArrayObject
     {
         return $this->get;
     }
 
-    final public function server(): Parameters
+    final public function server(): ArrayObject
     {
         return $this->server;
     }
 
-    final public function post(): Parameters
+    final public function data(): ArrayObject
     {
-        return $this->post;
+        return $this->data;
     }
 
 
