@@ -10,4 +10,9 @@ interface CustomersRepository
     public function fetch(Offset $offset): CustomersResult;
 
     public function find(string $id): ?Customer;
+
+    /**
+     * @param Customer[] $entities
+     */
+    public function create(array $entities): void;
 }
