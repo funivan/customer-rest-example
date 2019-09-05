@@ -29,8 +29,11 @@ class CreateCustomers implements Handler
     final public function handle(ServerRequest $request): Response
     {
         $customers = $request->data()->toArray()['customers'] ?? [];
-        if (!is_array($customers) || $customers === []) {
-            throw new InvalidParameter('customers', 'empty or undefined parameter');
+        if (!is_array($customers)) {
+            throw new InvalidParameter(
+                'customers',
+                sprintf('expect type to be array, %s given', gettype($customers))
+            );
         }
         $entities = [];
         foreach ($customers as $customer) {
