@@ -4,7 +4,7 @@
 namespace Funivan\CustomersRest\App\Repository\InMemory;
 
 
-use Funivan\CustomersRest\App\Endpoint\ListCustomers\Offset;
+use Funivan\CustomersRest\App\Endpoint\ListCustomers\Limit;
 use Funivan\CustomersRest\App\Entity\Customer;
 use Funivan\CustomersRest\App\Entity\CustomersList;
 use Funivan\CustomersRest\App\Repository\CustomersRepository;
@@ -28,14 +28,9 @@ class InMemoryRepository implements CustomersRepository
         }
     }
 
-    final public function fetch(Offset $offset): CustomersResult
+    final public function fetch(Limit $offset): CustomersResult
     {
         return new PredefinedCustomersResult();
-    }
-
-    final public function find(string $id): ?Customer
-    {
-        return $this->customers[$id] ?? null;
     }
 
     final public function create(CustomersList $customers): void

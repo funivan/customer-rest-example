@@ -2,15 +2,12 @@
 
 namespace Funivan\CustomersRest\App\Repository;
 
-use Funivan\CustomersRest\App\Endpoint\ListCustomers\Offset;
-use Funivan\CustomersRest\App\Entity\Customer;
+use Funivan\CustomersRest\App\Endpoint\ListCustomers\Limit;
 use Funivan\CustomersRest\App\Entity\CustomersList;
 
 interface CustomersRepository
 {
-    public function fetch(Offset $offset): CustomersResult;
-
-    public function find(string $id): ?Customer;
+    public function fetch(Limit $offset): CustomersResult;
 
     public function create(CustomersList $customers): void;
 

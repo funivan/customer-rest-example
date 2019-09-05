@@ -6,7 +6,7 @@ namespace Funivan\CustomersRest\App\Endpoint\ListCustomers;
 use Funivan\CustomersRest\Spl\Int\IntObject;
 use Funivan\CustomersRest\Spl\Int\PredefinedInt;
 
-class Offset
+class Limit
 {
 
     /**

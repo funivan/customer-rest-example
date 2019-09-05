@@ -11,19 +11,22 @@ class Customer
      * @var string
      */
     private $id;
-    /**
-     * @var string
-     */
-    private $name;
-    /**
-     * @var string
-     */
-    private $lastName;
 
     /**
      * @var string
      */
     private $email;
+
+    /**
+     * @var string
+     */
+    private $name;
+
+    /**
+     * @var string
+     */
+    private $lastName;
+
 
     public function __construct(string $id, string $email, string $name, string $lastName)
     {

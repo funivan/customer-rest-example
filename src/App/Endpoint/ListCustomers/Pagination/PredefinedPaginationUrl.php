@@ -4,7 +4,7 @@ declare(strict_types=1);
 namespace Funivan\CustomersRest\App\Endpoint\ListCustomers\Pagination;
 
 
-use Funivan\CustomersRest\App\Endpoint\ListCustomers\Offset;
+use Funivan\CustomersRest\App\Endpoint\ListCustomers\Limit;
 
 
 class PredefinedPaginationUrl implements PaginationUrl
@@ -22,11 +22,11 @@ class PredefinedPaginationUrl implements PaginationUrl
      */
     private $limitName;
     /**
-     * @var Offset
+     * @var Limit
      */
     private $offset;
 
-    public function __construct(string $path, string $offsetName, string $limitName, Offset $offset)
+    public function __construct(string $path, string $offsetName, string $limitName, Limit $offset)
     {
         $this->path = $path;
         $this->offsetName = $offsetName;
@@ -39,7 +39,7 @@ class PredefinedPaginationUrl implements PaginationUrl
      */
     final public function with(int $offset): PaginationUrl
     {
-        return new self($this->path, $this->offsetName, $this->limitName, Offset::createFromPlain($offset, $this->offset->getRowCount()));
+        return new self($this->path, $this->offsetName, $this->limitName, Limit::createFromPlain($offset, $this->offset->getRowCount()));
     }
 
     final public function toString(): string

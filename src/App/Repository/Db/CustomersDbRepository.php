@@ -3,9 +3,7 @@ declare(strict_types=1);
 
 namespace Funivan\CustomersRest\App\Repository\Db;
 
-use Exception;
-use Funivan\CustomersRest\App\Endpoint\ListCustomers\Offset;
-use Funivan\CustomersRest\App\Entity\Customer;
+use Funivan\CustomersRest\App\Endpoint\ListCustomers\Limit;
 use Funivan\CustomersRest\App\Entity\CustomersList;
 use Funivan\CustomersRest\App\Repository\CustomersRepository;
 use Funivan\CustomersRest\App\Repository\CustomersResult;
@@ -25,25 +23,9 @@ class CustomersDbRepository implements CustomersRepository
         $this->db = $db;
     }
 
-    final public function fetch(Offset $offset): CustomersResult
+    final public function fetch(Limit $offset): CustomersResult
     {
-        //@todo db fetch all customers
         return new PredefinedCustomersResult();
-    }
-
-    final public function find(string $id): ?Customer
-    {
-        $data = $this->db->prepare(
-            'SELECT * FROM customers WHERE id = :id limit 1', ['id' => $id]
-        )->fetch();
-        if (!is_array($data)) {
-            throw new Exception('Can not fetch user, invalid result');
-        }
-        $result = null;
-        if ($data !== []) {
-            $result = new Customer($data['id'], $data['email'], $data['name'], $data['lastName']);
-        }
-        return $result;
     }
 
     final public function create(CustomersList $customers): void

@@ -29,6 +29,15 @@ class Db
         $this->parameters = $parameters;
     }
 
+    final public function prepare(string $sql, array $parameters = []): PDOStatement
+    {
+        $stm = $this->connection()->prepare($sql);
+        foreach ($parameters as $name => $value) {
+            $stm->bindValue(':' . $name, $value);
+        }
+        return $stm;
+    }
+
     private function connection(): PDO
     {
         if ($this->connection === null) {
@@ -44,15 +53,6 @@ class Db
             );
         }
         return $this->connection;
-    }
-
-    final public function prepare(string $sql, array $parameters): PDOStatement
-    {
-        $stm = $this->connection()->prepare($sql);
-        foreach ($parameters as $name => $value) {
-            $stm->bindValue(':' . $name, $value);
-        }
-        return $stm;
     }
 
     final public function beginTransaction(): bool
