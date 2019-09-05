@@ -52,7 +52,7 @@ class FromDbCustomersResult implements CustomersResult
     {
         $result = null;
         $pages = ceil($this->size / $this->limit->getRowsCount());
-        if ($pages > $this->limit->getOffset()) {
+        if ($pages !== 1 && $pages > $this->limit->getOffset()) {
             $result = $this->limit->getOffset() + $this->limit->getRowsCount();
         }
         return $result;
