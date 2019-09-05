@@ -13,7 +13,7 @@ use Funivan\CustomersRest\App\Response\Error\NotFoundResponse;
 use Funivan\CustomersRest\App\SafeApp;
 use Funivan\CustomersRest\Http\Parameters\JsonInputFromStream;
 use Funivan\CustomersRest\Http\Request\ServerRequest;
-use Funivan\CustomersRest\Http\Response\Action\Sender;
+use Funivan\CustomersRest\Http\Response\Action\JsonResponseSender;
 use Funivan\CustomersRest\Router\MethodRoute;
 use Funivan\CustomersRest\Router\PathRoute;
 use Funivan\CustomersRest\Router\Router;
@@ -31,7 +31,7 @@ $repository = new CustomersDbRepository(
         new FromIniFileArrayObject(__DIR__ . '/../variables.env')
     )
 );
-$sender = new Sender();
+$sender = new JsonResponseSender();
 $app = new SafeApp(
     new Router(
         [
