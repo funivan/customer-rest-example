@@ -1,5 +1,12 @@
 # Rest example
 
+# Run application
+```shell script
+docker-compose up
+```
+Database dump located in `docker/database/customers.sql`
+
+
 ## Create customer
 Create one customer
 ```shell script
