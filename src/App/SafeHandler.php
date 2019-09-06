@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace Funivan\CustomersRest\App;
 
@@ -6,7 +7,7 @@ use Funivan\CustomersRest\App\Response\Error\ErrorBody;
 use Funivan\CustomersRest\App\Response\Error\ServerErrorResponse;
 use Funivan\CustomersRest\Http\Handler\Handler;
 use Funivan\CustomersRest\Http\Parameters\InvalidParameter;
-use Funivan\CustomersRest\Http\Request\ServerRequest;
+use Funivan\CustomersRest\Http\Request\Request;
 use Funivan\CustomersRest\Http\Response\PredefinedResponse;
 use Funivan\CustomersRest\Http\Response\Response;
 use Funivan\CustomersRest\Http\Response\Status\PredefinedStatus;
@@ -14,7 +15,7 @@ use Funivan\CustomersRest\Http\Response\Status\PredefinedStatus;
 /**
  * Decorator pattern
  */
-class SafeApp implements Handler
+class SafeHandler implements Handler
 {
     /**
      * @var Handler
@@ -26,7 +27,7 @@ class SafeApp implements Handler
         $this->origin = $origin;
     }
 
-    final public function handle(ServerRequest $request): Response
+    final public function handle(Request $request): Response
     {
         try {
             return $this->origin->handle($request);

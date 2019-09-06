@@ -6,6 +6,7 @@ namespace Funivan\CustomersRest\Router;
 
 use Funivan\CustomersRest\Http\Handler\Handler;
 use Funivan\CustomersRest\Http\Parameters\String\FallbackStringParameter;
+use Funivan\CustomersRest\Http\Request\Request;
 use Funivan\CustomersRest\Http\Request\ServerRequest;
 use Funivan\CustomersRest\Http\Response\Response;
 
@@ -39,7 +40,7 @@ class MethodRoute implements Route
         return $result;
     }
 
-    final public function handle(ServerRequest $request): Response
+    final public function handle(Request $request): Response
     {
         return $this->next->handle($request);
     }

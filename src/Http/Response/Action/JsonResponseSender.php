@@ -6,7 +6,7 @@ namespace Funivan\CustomersRest\Http\Response\Action;
 
 use Funivan\CustomersRest\Http\Response\Response;
 
-final class JsonResponseSender
+final class JsonResponseSender implements ResponseAction
 {
 
     public function execute(Response $response): void

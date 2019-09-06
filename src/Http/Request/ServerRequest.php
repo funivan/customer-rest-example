@@ -30,6 +30,16 @@ class ServerRequest implements Request
         $this->server = $server ?? new PredefinedArray();
     }
 
+    final public function data(): ArrayObject
+    {
+        return $this->data;
+    }
+
+    final public function withData(ArrayObject $data): Request
+    {
+        return new self($this->get(), $data, $this->server());
+    }
+
     final public function get(): ArrayObject
     {
         return $this->get;
@@ -39,11 +49,4 @@ class ServerRequest implements Request
     {
         return $this->server;
     }
-
-    final public function data(): ArrayObject
-    {
-        return $this->data;
-    }
-
-
 }

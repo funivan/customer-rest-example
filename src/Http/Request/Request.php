@@ -11,4 +11,6 @@ interface Request
     public function server(): ArrayObject;
 
     public function data(): ArrayObject;
+
+    public function withData(ArrayObject $data): Request;
 }

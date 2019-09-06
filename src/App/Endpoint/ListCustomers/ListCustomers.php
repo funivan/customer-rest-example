@@ -8,7 +8,7 @@ use Funivan\CustomersRest\App\Endpoint\ListCustomers\Pagination\PredefinedPagina
 use Funivan\CustomersRest\App\Repository\CustomersRepository;
 use Funivan\CustomersRest\Http\Handler\Handler;
 use Funivan\CustomersRest\Http\Parameters\FallbackIntParameter;
-use Funivan\CustomersRest\Http\Request\ServerRequest;
+use Funivan\CustomersRest\Http\Request\Request;
 use Funivan\CustomersRest\Http\Response\Response;
 use Funivan\CustomersRest\Http\Response\SuccessResponse;
 
@@ -29,7 +29,7 @@ class ListCustomers implements Handler
         $this->path = $path;
     }
 
-    final public function handle(ServerRequest $request): Response
+    final public function handle(Request $request): Response
     {
         $parameters = $request->get();
         $limit = new Limit(
