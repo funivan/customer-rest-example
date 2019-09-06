@@ -20,7 +20,7 @@ use Funivan\CustomersRest\Router\Router;
 use Funivan\CustomersRest\Spl\ArrayObject\ParametersFromEnvironmentFile;
 use Funivan\CustomersRest\Spl\ArrayObject\PredefinedArray;
 
-require __DIR__ . '/../vendor/autoload.php';
+require __DIR__ . '/../autoload.php';
 $repository = new CustomersDbRepository(
     new Db(
         new ParametersFromEnvironmentFile(__DIR__ . '/../variables.env')

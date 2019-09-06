@@ -1,5 +1,5 @@
 <?php
-require __DIR__ . '/vendor/autoload.php';
+require __DIR__ . '/autoload.php';
 $dir = __DIR__ . '/src/';
 $tests = shell_exec('find  ' . $dir . " -type f -name '*Test.php'");
 $files = preg_split('!\s*\n\s*!', trim($tests));
