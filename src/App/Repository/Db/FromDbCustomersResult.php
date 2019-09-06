@@ -51,8 +51,7 @@ class FromDbCustomersResult implements CustomersResult
     final public function nextLimit(): ?int
     {
         $result = null;
-        $pages = ceil($this->size / $this->limit->getRowsCount());
-        //@todo fix pagination error
+        $pages = (int)ceil($this->size / $this->limit->getRowsCount());
         if ($pages !== 1 && $pages > $this->limit->getOffset()) {
             $result = $this->limit->getOffset() + $this->limit->getRowsCount();
         }
