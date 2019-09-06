@@ -3,6 +3,7 @@
 # Run application
 ```shell script
 docker-compose up
+# Wait few minutes. Docker will start database, nginx and php containers.  
 ```
 Database dump located in `docker/database/customers.sql`
 
